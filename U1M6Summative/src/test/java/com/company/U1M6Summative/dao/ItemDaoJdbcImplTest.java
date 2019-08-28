@@ -38,7 +38,7 @@ public class ItemDaoJdbcImplTest {
         Item item = new Item();
         item.setName("Free Willy");
         item.setDescription("A joyous tale of a boy and a killer whale.");
-        item.setDailyRate(new BigDecimal( 3.34));
+        item.setDailyRate(new BigDecimal( "3.34"));
         item = itemDao.addItem(item);
         Item item2 = itemDao.getItem(item.getItemId());
         assertEquals(item, item2);
@@ -52,10 +52,10 @@ public class ItemDaoJdbcImplTest {
         Item item = new Item();
         item.setName("Free Willy");
         item.setDescription("A joyous tale of a boy and a killer whale.");
-        item.setDailyRate(new BigDecimal( 3.34));
+        item.setDailyRate(new BigDecimal( "3.34"));
         item = itemDao.addItem(item);
 
-        item.setDailyRate(new BigDecimal(4.00));
+        item.setDailyRate(new BigDecimal("4.00"));
 
         itemDao.updateItem(item);
 
@@ -68,11 +68,11 @@ public class ItemDaoJdbcImplTest {
         Item item = new Item();
         item.setName("Free Willy");
         item.setDescription("A joyous tale of a boy and a killer whale.");
-        item.setDailyRate(new BigDecimal( 3.34));
+        item.setDailyRate(new BigDecimal( "3.34"));
         itemDao.addItem(item);
         item.setName("Lion King");
         item.setDescription("A joyous tale of a lion who will grow to be a king.");
-        item.setDailyRate(new BigDecimal( 4.50));
+        item.setDailyRate(new BigDecimal( "4.50"));
         itemDao.addItem(item);
 
         List<Item> itemList = itemDao.getAllItems();
