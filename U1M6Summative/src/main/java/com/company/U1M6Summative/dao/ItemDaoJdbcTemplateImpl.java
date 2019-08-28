@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Repository
-public class ItemDaoJdbcTemplateImpl implements ItemDao{
+public class ItemDaoJdbcTemplateImpl implements ItemDao {
     @Override
     public Item addItem(Item item) {
         return null;
