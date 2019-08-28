@@ -6,10 +6,19 @@ import java.util.Objects;
 
 public class Invoice {
     private int invoiceId;
+    private int customerId;
     private Date orderDate;
     private Date pickupDate;
     private Date returnDate;
     private BigDecimal lateFee;
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
     public int getInvoiceId() {
         return invoiceId;

@@ -12,6 +12,7 @@ import java.util.List;
 
 
 @Repository
+
 public class ItemDaoJdbcTemplateImpl implements ItemDao{
 
     // Prepared statement strings
@@ -33,6 +34,7 @@ public class ItemDaoJdbcTemplateImpl implements ItemDao{
     public ItemDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate){
         this.jdbcTemplate = newJdbcTemplate;
     }
+
 
 
     @Override

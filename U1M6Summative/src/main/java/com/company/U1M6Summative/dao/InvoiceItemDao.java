@@ -6,9 +6,14 @@ import java.util.List;
 
 public interface InvoiceItemDao {
     public InvoiceItem addInvoiceItem(InvoiceItem invoiceItem);
+
     public InvoiceItem getInvoiceItem(int invoiceItemId);
+
     public List<InvoiceItem> getAllInvoiceItems();
+
     public List<InvoiceItem> getAllInvoiceItemsByInvoiceId(int invoiceId);
+
     public void updateInvoiceItem(InvoiceItem invoiceItem);
+
     public void deleteInvoiceItem(int invoiceItemId);
 }
