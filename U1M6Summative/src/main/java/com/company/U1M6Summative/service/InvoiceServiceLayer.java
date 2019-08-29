@@ -48,8 +48,8 @@ public class InvoiceServiceLayer {
         viewModel.setInvoiceItems(invoiceItems);
         return viewModel;
     }
-    public InvoiceViewModel findInvoice(int id) {
-        Invoice invoice = invoiceDao.getInvoice(id);
+    public InvoiceViewModel findInvoice(int invoiceId) {
+        Invoice invoice = invoiceDao.getInvoice(invoiceId);
         return buildInvoiceViewModel(invoice);
     }
     public List<InvoiceViewModel> findAllInvoices() {
