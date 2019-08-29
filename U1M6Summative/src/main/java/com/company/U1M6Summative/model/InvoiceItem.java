@@ -1,14 +1,22 @@
 package com.company.U1M6Summative.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class InvoiceItem {
     private int invoiceItemId;
+    @NotEmpty(message = "Must provide invoiceId")
     private int invoiceId;
+    @NotEmpty(message = "Must provide itemId")
     private int itemId;
+    @NotEmpty(message = "Must provide quantity")
+    @Size(min=1, message = "You must have a quantity of at least 1")
     private int quantity;
+    @NotEmpty(message = "Must provide unitRate")
     private BigDecimal unitRate;
+    @NotEmpty(message = "Must provide discount value")
     private BigDecimal discount;
 
     public int getInvoiceId() {
