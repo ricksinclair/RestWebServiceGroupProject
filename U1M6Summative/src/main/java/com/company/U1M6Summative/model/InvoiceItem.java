@@ -5,11 +5,19 @@ import java.util.Objects;
 
 public class InvoiceItem {
     private int invoiceItemId;
+    private int invoiceId;
     private int itemId;
     private int quantity;
     private BigDecimal unitRate;
     private BigDecimal discount;
 
+    public int getInvoiceId() {
+        return invoiceId;
+    }
+
+    public void setInvoiceId(int invoiceId) {
+        this.invoiceId = invoiceId;
+    }
 
     public int getInvoiceItemId() {
         return invoiceItemId;

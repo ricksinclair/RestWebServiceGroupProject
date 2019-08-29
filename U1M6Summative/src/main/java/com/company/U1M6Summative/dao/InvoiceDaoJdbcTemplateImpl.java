@@ -109,4 +109,9 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
 
         return invoice;
     }
+
+    @Override
+    public void deleteAllInvoicesByCustomer(int customerId) {
+
+    }
 }
