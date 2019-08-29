@@ -29,10 +29,13 @@ public class InvoiceDaoJdbcImplTest {
 
     @Before
     public void setUp() throws Exception {
+
         List<Invoice> invoiceList = invoiceDao.getAllInvoices();
         invoiceList.forEach(invoice -> invoiceDao.deleteInvoice(invoice.getInvoiceId()));
+
         List<Customer> customerList = customerDao.getAllCustomers();
         customerList.forEach(customer -> customerDao.deleteCustomer(customer.getCustomerId()));
+
     }
 
     @After
@@ -150,9 +153,9 @@ public class InvoiceDaoJdbcImplTest {
         invoice.setLateFee(new BigDecimal("0.00"));
         invoiceDao.addInvoice(invoice);
 
-        List<Invoice> invoiceList = invoiceDao.getAllInvoices();
+        List<Invoice> invoiceList = invoiceDao.getInvoicesByCustomerId(customer2.getCustomerId());
 
-        assertEquals(invoiceList.size(), 3);
+        assertEquals(invoiceList.size(), 2);
 
         invoiceDao.deleteAllInvoicesByCustomer(customer2.getCustomerId());
 
@@ -160,5 +163,36 @@ public class InvoiceDaoJdbcImplTest {
 
         assertEquals(invoiceList.size(), 1);
 
+    }
+
+    @Test
+    public void updateInvoiceTest(){
+
+        Customer customer = new Customer();
+        customer.setFirstName("Johnny");
+        customer.setLastName("Quest");
+        customer.setCompany("Cartoon Network");
+        customer.setEmail("Johnny.Quest@cartoonnetwork.com");
+        customer.setPhone("212-555-5555");
+
+        customer = customerDao.addCustomer(customer);
+
+        Invoice invoice = new Invoice();
+        invoice.setCustomerId(customer.getCustomerId());
+        invoice.setOrderDate(Date.valueOf("2019-08-27"));
+        invoice.setPickupDate(Date.valueOf("2019-08-27"));
+        invoice.setReturnDate(Date.valueOf("2019-08-28"));
+        invoice.setLateFee(new BigDecimal("0.00"));
+
+        invoice = invoiceDao.addInvoice(invoice);
+
+        //Updating a existing Invoice in the database
+        invoice.setReturnDate(Date.valueOf("2019-08-31"));
+
+        invoiceDao.updateInvoice(invoice);
+
+        Invoice invoice2 = invoiceDao.getInvoice(invoice.getInvoiceId());
+
+        assertEquals(invoice,invoice2);
     }
 }

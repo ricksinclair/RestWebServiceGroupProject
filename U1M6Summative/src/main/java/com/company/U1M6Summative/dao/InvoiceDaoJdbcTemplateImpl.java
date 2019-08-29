@@ -90,7 +90,6 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
                 invoice.getLateFee(),
                 invoice.getInvoiceId()
                 );
-
     }
 
     @Override

@@ -82,7 +82,7 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
 
     @Override
     public void deleteCustomer(int customerId) {
-        jdbcTemplate.update(DELETE_CUSTOMER_SQL,customerId);
+        jdbcTemplate.update(DELETE_CUSTOMER_SQL, customerId);
     }
 
     //**********************************************************************************************************************
