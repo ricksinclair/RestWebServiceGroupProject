@@ -37,4 +37,16 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
     public void deleteInvoiceItem(int invoiceItemId) {
 
     }
+
+    @Override
+    public void deleteInvoiceItemsByInvoiceId(int invoiceId) {
+
+    }
+
+    @Override
+    public void deleteInvoiceItemsByItemId(int itemId) {
+
+    }
+
+
 }

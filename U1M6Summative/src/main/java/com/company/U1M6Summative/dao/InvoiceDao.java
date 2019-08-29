@@ -17,4 +17,6 @@ public interface InvoiceDao {
 
     public void deleteInvoice(int invoiceId);
 
+    public void deleteAllInvoicesByCustomer(int customerId);
+
 }

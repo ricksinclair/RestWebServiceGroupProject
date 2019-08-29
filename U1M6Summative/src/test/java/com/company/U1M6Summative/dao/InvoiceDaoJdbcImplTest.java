@@ -89,6 +89,7 @@ public class InvoiceDaoJdbcImplTest {
         invoice.setLateFee(new BigDecimal(0));
 
         invoiceDao.addInvoice(invoice);
+        invoice.setCustomerId(customer.getCustomerId());
         invoice.setOrderDate(Date.valueOf("2019-08-22"));
         invoice.setPickupDate(Date.valueOf("2019-08-22"));
         invoice.setReturnDate(Date.valueOf("2019-08-23"));
@@ -102,7 +103,7 @@ public class InvoiceDaoJdbcImplTest {
     }
 
     @Test
-    public void getAllInvoicesByCustomerId() {
+    public void getDeleteInvoicesByCustomerId() {
         Customer customer = new Customer();
         customer.setFirstName("Darth");
         customer.setLastName("Vader");
@@ -143,6 +144,10 @@ public class InvoiceDaoJdbcImplTest {
         List<Invoice> invoiceList = invoiceDao.getAllInvoices();
 
         assertEquals(invoiceList.size(), 2);
+
+        invoiceDao.deleteAllInvoicesByCustomer(customer.getCustomerId());
+
+        assertEquals(invoiceList.size(), 1);
 
     }
 }
