@@ -23,6 +23,7 @@ import static org.junit.Assert.assertNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class InvoiceItemDaoJdbcTemplateImplTest {
+
     @Autowired
     InvoiceItemDao invoiceItemDao;
 
@@ -37,15 +38,18 @@ public class InvoiceItemDaoJdbcTemplateImplTest {
 
     @Before
     public void setUp() throws Exception {
+
         List<InvoiceItem> invoiceItemList = invoiceItemDao.getAllInvoiceItems();
         invoiceItemList.forEach(invoiceItem -> invoiceItemDao.deleteInvoiceItem(invoiceItem.getInvoiceItemId()));
+
         List<Item> itemList = itemDao.getAllItems();
         itemList.forEach(item -> itemDao.deleteItem(item.getItemId()));
+
         List<Invoice> invoiceList = invoiceDao.getAllInvoices();
         invoiceList.forEach(invoice -> invoiceDao.deleteInvoice(invoice.getInvoiceId()));
+
         List<Customer> customerList = customerDao.getAllCustomers();
         customerList.forEach(customer -> customerDao.deleteCustomer(customer.getCustomerId()));
-
 
     }
 
