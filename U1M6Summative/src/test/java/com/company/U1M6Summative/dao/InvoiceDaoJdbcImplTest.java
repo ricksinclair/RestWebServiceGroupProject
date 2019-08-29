@@ -107,6 +107,7 @@ public class InvoiceDaoJdbcImplTest {
 
     @Test
     public void getDeleteInvoicesByCustomerId() {
+        //Creating and adding customers to the db
         Customer customer = new Customer();
         customer.setFirstName("Darth");
         customer.setLastName("Vader");
@@ -114,13 +115,6 @@ public class InvoiceDaoJdbcImplTest {
         customer.setEmail("Darth@deathstar.net");
         customer.setPhone("212-555-5555");
         customer = customerDao.addCustomer(customer);
-
-        Invoice invoice = new Invoice();
-        invoice.setCustomerId(customer.getCustomerId());
-        invoice.setOrderDate(Date.valueOf("2019-08-27"));
-        invoice.setPickupDate(Date.valueOf("2019-08-27"));
-        invoice.setReturnDate(Date.valueOf("2019-08-28"));
-        invoice.setLateFee(new BigDecimal("0.00"));
 
         Customer customer2 = new Customer();
         customer2.setFirstName("Johnny");
@@ -130,14 +124,26 @@ public class InvoiceDaoJdbcImplTest {
         customer2.setPhone("212-555-5555");
 
         customer2 = customerDao.addCustomer(customer2);
-        invoice.setCustomerId(customer2.getCustomerId());
+
+        //Creating and adding invoices to the database
+        Invoice invoice = new Invoice();
+        invoice.setCustomerId(customer.getCustomerId());   //Invoice of customer 1
         invoice.setOrderDate(Date.valueOf("2019-08-27"));
         invoice.setPickupDate(Date.valueOf("2019-08-27"));
         invoice.setReturnDate(Date.valueOf("2019-08-28"));
         invoice.setLateFee(new BigDecimal("0.00"));
 
         invoiceDao.addInvoice(invoice);
-        invoice.setCustomerId(customer2.getCustomerId());
+
+        invoice.setCustomerId(customer2.getCustomerId());  //Invoice of customer 2
+        invoice.setOrderDate(Date.valueOf("2019-08-27"));
+        invoice.setPickupDate(Date.valueOf("2019-08-27"));
+        invoice.setReturnDate(Date.valueOf("2019-08-28"));
+        invoice.setLateFee(new BigDecimal("0.00"));
+
+        invoiceDao.addInvoice(invoice);
+
+        invoice.setCustomerId(customer2.getCustomerId()); //Invoice of customer 2
         invoice.setOrderDate(Date.valueOf("2019-08-22"));
         invoice.setPickupDate(Date.valueOf("2019-08-22"));
         invoice.setReturnDate(Date.valueOf("2019-08-23"));
@@ -146,9 +152,11 @@ public class InvoiceDaoJdbcImplTest {
 
         List<Invoice> invoiceList = invoiceDao.getAllInvoices();
 
-        assertEquals(invoiceList.size(), 2);
+        assertEquals(invoiceList.size(), 3);
 
-        invoiceDao.deleteAllInvoicesByCustomer(customer.getCustomerId());
+        invoiceDao.deleteAllInvoicesByCustomer(customer2.getCustomerId());
+
+        invoiceList = invoiceDao.getAllInvoices();
 
         assertEquals(invoiceList.size(), 1);
 
