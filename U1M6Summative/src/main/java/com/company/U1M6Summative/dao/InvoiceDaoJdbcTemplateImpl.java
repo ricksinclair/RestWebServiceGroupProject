@@ -37,4 +37,9 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
     public void deleteInvoice(int invoiceId) {
 
     }
+
+    @Override
+    public void deleteAllInvoicesByCustomer(int customerId) {
+
+    }
 }
