@@ -232,4 +232,102 @@ public class InvoiceItemDaoJdbcTemplateImplTest {
         List<InvoiceItem> invoiceItems = invoiceItemDao.getAllInvoiceItems();
         assertEquals(invoiceItems.size(), 2);
     }
+
+    @Test
+    public void getAllInvoiceItemsByItemIdTest(){
+
+        Item item = new Item();
+        item.setName("Free Willy");
+        item.setDescription("A joyous tale of a boy and a killer whale.");
+        item.setDailyRate(new BigDecimal("3.34"));
+
+        item = itemDao.addItem(item);
+
+        Customer customer = new Customer();
+        customer.setFirstName("Johnny");
+        customer.setLastName("Quest");
+        customer.setCompany("Cartoon Network");
+        customer.setEmail("Johnny.Quest@cartoonnetwork.com");
+        customer.setPhone("212-555-5555");
+
+        customer = customerDao.addCustomer(customer);
+
+        Invoice invoice = new Invoice();
+        invoice.setCustomerId(customer.getCustomerId());
+        invoice.setOrderDate(Date.valueOf("2019-08-27"));
+        invoice.setPickupDate(Date.valueOf("2019-08-27"));
+        invoice.setReturnDate(Date.valueOf("2019-08-28"));
+        invoice.setLateFee(new BigDecimal("0.00"));
+
+        invoiceDao.addInvoice(invoice);
+
+        InvoiceItem invoiceItem = new InvoiceItem();
+        invoiceItem.setItemId(item.getItemId());
+        invoiceItem.setInvoiceId(invoice.getInvoiceId());
+        invoiceItem.setUnitRate(new BigDecimal("2.50"));
+        invoiceItem.setDiscount(new BigDecimal("0.00"));
+        invoiceItem.setQuantity(4);
+
+        invoiceItemDao.addInvoiceItem(invoiceItem);
+
+        //Adding another invoice item
+        invoiceItem.setItemId(item.getItemId());
+        invoiceItem.setInvoiceId(invoice.getInvoiceId());
+        invoiceItem.setUnitRate(new BigDecimal("6.50"));
+        invoiceItem.setDiscount(new BigDecimal("1.00"));
+        invoiceItem.setQuantity(10);
+
+        invoiceItemDao.addInvoiceItem(invoiceItem);
+
+        List<InvoiceItem> invoiceItems = invoiceItemDao.getAllInvoiceItemsByInvoiceId(invoice.getInvoiceId());
+        assertEquals(invoiceItems.size(), 2);
+    }
+
+    @Test
+    public void updateInvoiceItemTest(){
+
+        Item item = new Item();
+        item.setName("Free Willy");
+        item.setDescription("A joyous tale of a boy and a killer whale.");
+        item.setDailyRate(new BigDecimal("3.34"));
+
+        item = itemDao.addItem(item);
+
+        Customer customer = new Customer();
+        customer.setFirstName("Johnny");
+        customer.setLastName("Quest");
+        customer.setCompany("Cartoon Network");
+        customer.setEmail("Johnny.Quest@cartoonnetwork.com");
+        customer.setPhone("212-555-5555");
+
+        customer = customerDao.addCustomer(customer);
+
+        Invoice invoice = new Invoice();
+        invoice.setCustomerId(customer.getCustomerId());
+        invoice.setOrderDate(Date.valueOf("2019-08-27"));
+        invoice.setPickupDate(Date.valueOf("2019-08-27"));
+        invoice.setReturnDate(Date.valueOf("2019-08-28"));
+        invoice.setLateFee(new BigDecimal("0.00"));
+
+        invoiceDao.addInvoice(invoice);
+
+        InvoiceItem invoiceItem = new InvoiceItem();
+        invoiceItem.setItemId(item.getItemId());
+        invoiceItem.setInvoiceId(invoice.getInvoiceId());
+        invoiceItem.setUnitRate(new BigDecimal("2.50"));
+        invoiceItem.setDiscount(new BigDecimal("0.00"));
+        invoiceItem.setQuantity(4);
+
+        invoiceItem = invoiceItemDao.addInvoiceItem(invoiceItem);
+
+        //Update one parameter of the invoiceItem object
+        invoiceItem.setQuantity(10);
+
+        invoiceItemDao.updateInvoiceItem(invoiceItem);
+
+        InvoiceItem invoiceItem2 = invoiceItemDao.getInvoiceItem(invoiceItem.getInvoiceItemId());
+
+        assertEquals(invoiceItem, invoiceItem2);
+
+    }
 }
