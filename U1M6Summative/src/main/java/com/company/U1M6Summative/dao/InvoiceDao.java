@@ -5,18 +5,18 @@ import com.company.U1M6Summative.model.Invoice;
 import java.util.List;
 
 public interface InvoiceDao {
-    Invoice addInvoice(Invoice invoice);
+    public Invoice addInvoice(Invoice invoice);
 
-    Invoice getInvoice(int invoiceId);
+    public Invoice getInvoice(int invoiceId);
 
-    List<Invoice> getAllInvoices();
+    public List<Invoice> getAllInvoices();
 
-    List<Invoice> getInvoicesByCustomerId(int customerId);
+    public List<Invoice> getInvoicesByCustomerId(int customerId);
 
-    void updateInvoice(Invoice invoice);
+    public void updateInvoice(Invoice invoice);
 
-    void deleteInvoice(int invoiceId);
+    public void deleteInvoice(int invoiceId);
 
-    void deleteAllInvoicesByCustomer(int customerId);
+    public void deleteAllInvoicesByCustomer(int customerId);
 
 }

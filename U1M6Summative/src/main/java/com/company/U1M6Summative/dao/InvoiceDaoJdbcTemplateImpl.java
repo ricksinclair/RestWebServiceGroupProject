@@ -31,11 +31,12 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
     private static final String UPDATE_INVOICE_SQL = "update invoice set customer_id = ?, order_date = ?, pickup_date = ?, return_date = ?, late_fee = ? where invoice_id = ?";
 
 
+
     //*********************************************************************************************************************
     private JdbcTemplate jdbcTemplate; // this is a dependency
 
     @Autowired
-    public InvoiceDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate) {
+    public InvoiceDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate){
         this.jdbcTemplate = newJdbcTemplate;
     }
 
@@ -48,9 +49,9 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
                 invoice.getPickupDate(),
                 invoice.getReturnDate(),
                 invoice.getLateFee()
-        );
+                );
 
-        int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
+        int id = jdbcTemplate.queryForObject("select last_insert_id()",Integer.class);
         invoice.setInvoiceId(id);
         return invoice;
     }
@@ -58,9 +59,9 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
     @Override
     public Invoice getInvoice(int invoiceId) {
 
-        try {
-            return jdbcTemplate.queryForObject(SELECT_INVOICE_SQL, this::mapRowToInvoice, invoiceId);
-        } catch (EmptyResultDataAccessException e) {
+        try{
+            return jdbcTemplate.queryForObject(SELECT_INVOICE_SQL, this::mapRowToInvoice,invoiceId);
+        }catch(EmptyResultDataAccessException e){
             return null;
         }
     }
@@ -74,7 +75,7 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
     @Override
     public List<Invoice> getInvoicesByCustomerId(int customerId) {
 
-        return jdbcTemplate.query(SELECT_INVOICES_BY_CUSTOMER_SQL, this::mapRowToInvoice, customerId);
+        return jdbcTemplate.query(SELECT_INVOICES_BY_CUSTOMER_SQL, this::mapRowToInvoice,customerId);
     }
 
     @Override
@@ -88,7 +89,7 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
                 invoice.getReturnDate(),
                 invoice.getLateFee(),
                 invoice.getInvoiceId()
-        );
+                );
     }
 
     @Override
@@ -106,7 +107,7 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
     }
 
     //*************************************************************************************
-    private Invoice mapRowToInvoice(ResultSet rs, int rowNum) throws SQLException {
+    private Invoice mapRowToInvoice(ResultSet rs, int rowNum) throws SQLException{
 
         Invoice invoice = new Invoice();
 

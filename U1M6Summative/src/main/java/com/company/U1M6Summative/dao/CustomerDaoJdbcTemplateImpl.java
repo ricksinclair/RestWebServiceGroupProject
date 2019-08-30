@@ -30,13 +30,13 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
     private JdbcTemplate jdbcTemplate; // this is a dependency
 
     @Autowired
-    public CustomerDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate) {
+    public CustomerDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate){
         this.jdbcTemplate = newJdbcTemplate;
     }
 
     @Override
     @Transactional
-    public Customer addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer){
 
         jdbcTemplate.update(INSERT_CUSTOMER_SQL,
                 customer.getFirstName(),
@@ -46,7 +46,7 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
                 customer.getPhone()
         );
 
-        int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
+        int id = jdbcTemplate.queryForObject("select last_insert_id()",Integer.class);
         customer.setCustomerId(id);
         return customer;
     }
@@ -54,9 +54,9 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
     @Override
     public Customer getCustomer(int customerId) {
 
-        try {
-            return jdbcTemplate.queryForObject(SELECT_CUSTOMER_SQL, this::mapRowToCustomer, customerId);
-        } catch (EmptyResultDataAccessException e) {
+        try{
+            return jdbcTemplate.queryForObject(SELECT_CUSTOMER_SQL, this::mapRowToCustomer,customerId);
+        }catch(EmptyResultDataAccessException e){
             return null;
         }
     }

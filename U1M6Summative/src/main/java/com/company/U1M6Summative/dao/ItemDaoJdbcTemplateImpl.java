@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 
-public class ItemDaoJdbcTemplateImpl implements ItemDao {
+public class ItemDaoJdbcTemplateImpl implements ItemDao{
 
     // Prepared statement strings
     private static final String INSERT_ITEM_SQL = "insert into item (name, description, daily_rate) values (?, ?, ?)";
@@ -31,9 +31,10 @@ public class ItemDaoJdbcTemplateImpl implements ItemDao {
     private JdbcTemplate jdbcTemplate; // this is a dependency
 
     @Autowired
-    public ItemDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate) {
+    public ItemDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate){
         this.jdbcTemplate = newJdbcTemplate;
     }
+
 
 
     @Override
@@ -45,7 +46,7 @@ public class ItemDaoJdbcTemplateImpl implements ItemDao {
                 item.getDailyRate()
         );
 
-        int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
+        int id = jdbcTemplate.queryForObject("select last_insert_id()",Integer.class);
         item.setItemId(id);
         return item;
     }
@@ -53,9 +54,9 @@ public class ItemDaoJdbcTemplateImpl implements ItemDao {
     @Override
     public Item getItem(int itemId) {
 
-        try {
-            return jdbcTemplate.queryForObject(SELECT_ITEM_SQL, this::mapRowToItem, itemId);
-        } catch (EmptyResultDataAccessException e) {
+        try{
+            return jdbcTemplate.queryForObject(SELECT_ITEM_SQL, this::mapRowToItem,itemId);
+        }catch(EmptyResultDataAccessException e){
             return null;
         }
     }
@@ -79,7 +80,7 @@ public class ItemDaoJdbcTemplateImpl implements ItemDao {
 
     @Override
     public void deleteItem(int itemId) {
-        jdbcTemplate.update(DELETE_ITEM_SQL, itemId);
+        jdbcTemplate.update(DELETE_ITEM_SQL,itemId);
 
     }
 

@@ -5,14 +5,14 @@ import com.company.U1M6Summative.model.Item;
 import java.util.List;
 
 public interface ItemDao {
-    Item addItem(Item item);
+    public Item addItem(Item item);
 
-    Item getItem(int itemId);
+    public Item getItem(int itemId);
 
-    List<Item> getAllItems();
+    public List<Item> getAllItems();
 
-    void updateItem(Item item);
+    public void updateItem(Item item);
 
-    void deleteItem(int itemId);
+    public void deleteItem(int itemId);
 
 }

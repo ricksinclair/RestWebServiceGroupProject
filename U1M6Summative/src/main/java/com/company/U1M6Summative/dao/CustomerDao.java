@@ -5,13 +5,13 @@ import com.company.U1M6Summative.model.Customer;
 import java.util.List;
 
 public interface CustomerDao {
-    Customer addCustomer(Customer customer);
+    public Customer addCustomer(Customer customer);
 
-    Customer getCustomer(int customerId);
+    public Customer getCustomer(int customerId);
 
-    List<Customer> getAllCustomers();
+    public List<Customer> getAllCustomers();
 
-    void updateCustomer(Customer customer);
+    public void updateCustomer(Customer customer);
 
-    void deleteCustomer(int customerId);
+    public void deleteCustomer(int customerId);
 }

@@ -12,7 +12,7 @@ public class InvoiceItem {
     @NotEmpty(message = "Must provide itemId")
     private int itemId;
     @NotEmpty(message = "Must provide quantity")
-    @Size(min = 1, message = "You must have a quantity of at least 1")
+    @Size(min=1, message = "You must have a quantity of at least 1")
     private int quantity;
     @NotEmpty(message = "Must provide unitRate")
     private BigDecimal unitRate;
