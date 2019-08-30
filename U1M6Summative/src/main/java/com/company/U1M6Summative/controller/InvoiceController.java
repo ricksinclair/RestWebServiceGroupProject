@@ -1,8 +1,6 @@
 package com.company.U1M6Summative.controller;
 
-<<<<<<< HEAD
-public class InvoiceController {
-=======
+
 
 import com.company.U1M6Summative.model.Invoice;
 import com.company.U1M6Summative.service.InvoiceServiceLayer;
@@ -47,5 +45,4 @@ public class InvoiceController {
     }
 
 
->>>>>>> parent of b3f673e... finished invoice controller
 }
