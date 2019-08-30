@@ -61,6 +61,16 @@ public class InvoiceServiceLayer {
         }
         return ivmList;
     }
+<<<<<<< HEAD
+=======
+
+    public List<Invoice> findAllInvoicesByCustomerId(int customerId) {
+
+        return invoiceDao.getInvoicesByCustomerId(customerId);
+
+    }
+
+>>>>>>> parent of b3f673e... finished invoice controller
     @Transactional
     public void updateInvoice(InvoiceViewModel viewModel) {
         Invoice i = new Invoice();
