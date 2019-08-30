@@ -1,6 +1,7 @@
 package com.company.U1M6Summative.viewmodel;
 
 import com.company.U1M6Summative.model.Invoice;
+import com.company.U1M6Summative.model.InvoiceItem;
 
 
 import java.util.*;
@@ -70,7 +71,7 @@ public class CustomerViewModel {
         return invoiceListMap;
     }
 
-    public void setInvoiceListMap(Map<Invoice, Object[]> invoiceListMap) {
+    public void setInvoiceListMap(Map<Invoice, InvoiceItem[]> invoiceListMap) {
         this.invoiceListMap = invoiceListMap;
     }
 

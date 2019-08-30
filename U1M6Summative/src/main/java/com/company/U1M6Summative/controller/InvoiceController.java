@@ -32,11 +32,18 @@ public class InvoiceController {
         return invoiceServiceLayer.findAllInvoices();
     }
 
-    @RequestMapping(path = "/invoice/customer/{customerId}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public List<Invoice> getAllInvoices(@PathVariable int customerId) {
-        return invoiceServiceLayer.findAllInvoicesByCustomerId(customerId);
+    @RequestMapping(path = "/invoice", method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public void updateInvoice(@Valid @RequestBody InvoiceViewModel ivm){
+        invoiceServiceLayer.updateInvoice(ivm);
     }
+
+    @RequestMapping (path = "/invoice/{invoiceId}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public void deleteInvoice(@PathVariable int invoiceId){
+        invoiceServiceLayer.removeInvoice(invoiceId);
+    }
+
 
     @RequestMapping(path = "/invoice/{invoiceId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)

@@ -6,7 +6,9 @@ import com.company.U1M6Summative.dao.InvoiceItemDao;
 import com.company.U1M6Summative.dao.ItemDao;
 import com.company.U1M6Summative.model.Customer;
 import com.company.U1M6Summative.model.Invoice;;
+import com.company.U1M6Summative.model.InvoiceItem;
 import com.company.U1M6Summative.viewmodel.CustomerViewModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class CustomerServiceLayer {
     private InvoiceItemDao invoiceItemDao;
     private ItemDao itemDao;
 
+    @Autowired
     public CustomerServiceLayer(CustomerDao customerDao, InvoiceDao invoiceDao, InvoiceItemDao invoiceItemDao, ItemDao itemDao){
 
         this.customerDao = customerDao;
@@ -36,15 +39,15 @@ public class CustomerServiceLayer {
         List<Invoice> invoicesPerCustomer = invoiceDao.getInvoicesByCustomerId(id);
 
         //List of InvoiceItem per invoice
-        List <Object[]> invoiceItemsPerCustomerInvoice = new ArrayList<>();
+        List <InvoiceItem[]> invoiceItemsPerCustomerInvoice = new ArrayList<>();
 
-        for(int i = 0; i < invoicesPerCustomer.size(); i++){
+        for (Invoice invoice : invoicesPerCustomer) {
 
-            invoiceItemsPerCustomerInvoice.add(invoiceItemDao.getAllInvoiceItemsByInvoiceId(invoicesPerCustomer.get(i).getInvoiceId()).toArray());
+            invoiceItemsPerCustomerInvoice.add((InvoiceItem[]) invoiceItemDao.getAllInvoiceItemsByInvoiceId(invoice.getInvoiceId()).toArray());
         }
 
         //Map to store an Invoice object with theirs correspondent InvoiceItems
-        Map<Invoice,Object[]> invoiceMap = new HashMap<>();
+        Map<Invoice,InvoiceItem[]> invoiceMap = new HashMap<>();
 
         //Filling the map
         for(int i = 0; i < invoicesPerCustomer.size(); i++){
