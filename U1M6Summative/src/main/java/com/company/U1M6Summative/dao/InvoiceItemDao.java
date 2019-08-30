@@ -5,19 +5,19 @@ import com.company.U1M6Summative.model.InvoiceItem;
 import java.util.List;
 
 public interface InvoiceItemDao {
-    public InvoiceItem addInvoiceItem(InvoiceItem invoiceItem);
+    InvoiceItem addInvoiceItem(InvoiceItem invoiceItem);
 
-    public InvoiceItem getInvoiceItem(int invoiceItemId);
+    InvoiceItem getInvoiceItem(int invoiceItemId);
 
-    public List<InvoiceItem> getAllInvoiceItems();
+    List<InvoiceItem> getAllInvoiceItems();
 
-    public List<InvoiceItem> getAllInvoiceItemsByInvoiceId(int invoiceId);
+    List<InvoiceItem> getAllInvoiceItemsByInvoiceId(int invoiceId);
 
-    public void updateInvoiceItem(InvoiceItem invoiceItem);
+    void updateInvoiceItem(InvoiceItem invoiceItem);
 
-    public void deleteInvoiceItem(int invoiceItemId);
+    void deleteInvoiceItem(int invoiceItemId);
 
-    public void deleteInvoiceItemsByInvoiceId(int invoiceId);
+    void deleteInvoiceItemsByInvoiceId(int invoiceId);
 
-    public void deleteInvoiceItemsByItemId(int itemId);
+    void deleteInvoiceItemsByItemId(int itemId);
 }
