@@ -67,11 +67,7 @@ public class InvoiceServiceLayer {
         return ivmList;
     }
 
-    public List<Invoice> findAllInvoicesByCustomerId(int customerId) {
 
-        return invoiceDao.getInvoicesByCustomerId(customerId);
-
-    }
 
     @Transactional
     public void updateInvoice(InvoiceViewModel viewModel) {
