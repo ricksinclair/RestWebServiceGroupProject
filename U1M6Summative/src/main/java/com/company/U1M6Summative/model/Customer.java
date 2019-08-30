@@ -8,23 +8,23 @@ public class Customer {
     private int customerId;
 
     @NotEmpty(message = "Must provide customer firstName")
-    @Size(max = 50, message = "firstName maximum of 50 characters")
+    @Size(max=50, message = "firstName maximum of 50 characters")
     private String firstName;
 
     @NotEmpty(message = "Must provide customer lastName")
-    @Size(max = 50, message = "lastName maximum of 50 characters")
+    @Size(max=50, message = "lastName maximum of 50 characters")
     private String lastName;
 
     @NotEmpty(message = "Must provide customer email")
-    @Size(max = 50, message = "firstName maximum of 75 characters")
+    @Size(max=50, message = "firstName maximum of 75 characters")
     private String email;
 
     @NotEmpty(message = "Must provide customer company")
-    @Size(max = 50, message = "company maximum of 50 characters")
+    @Size(max=50, message = "company maximum of 50 characters")
     private String company;
 
     @NotEmpty(message = "Must provide customer phone")
-    @Size(max = 50, message = "phone maximum of 50 characters")
+    @Size(max=50, message = "phone maximum of 50 characters")
     private String phone;
 
     public int getCustomerId() {
