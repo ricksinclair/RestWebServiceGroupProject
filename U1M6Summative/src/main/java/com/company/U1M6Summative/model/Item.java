@@ -11,7 +11,7 @@ public class Item {
     @Size(max = 50, message = "must be at most 50")
     private String name;
     @NotEmpty(message = "must include description")
-    @Size(max=255, message = "description length must be 255 characters or lower")
+    @Size(max = 255, message = "description length must be 255 characters or lower")
     private String description;
     @NotEmpty(message = "Must include dailyRate")
     private BigDecimal dailyRate;

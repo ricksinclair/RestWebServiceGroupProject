@@ -33,12 +33,11 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
     private static final String UPDATE_INVOICE_ITEM_SQL = "update invoice_item set invoice_id = ?, item_id = ?, quantity = ?, unit_rate = ?, discount = ? where invoice_item_id = ?";
 
 
-
     //*********************************************************************************************************************
     private JdbcTemplate jdbcTemplate; // this is a dependency
 
     @Autowired
-    public InvoiceItemDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate){
+    public InvoiceItemDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate) {
         this.jdbcTemplate = newJdbcTemplate;
     }
 
@@ -52,7 +51,7 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
                 invoiceItem.getQuantity(),
                 invoiceItem.getUnitRate(),
                 invoiceItem.getDiscount()
-                );
+        );
 
         int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
         invoiceItem.setInvoiceItemId(id);
@@ -62,9 +61,9 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
     @Override
     public InvoiceItem getInvoiceItem(int invoiceItemId) {
 
-        try{
+        try {
             return jdbcTemplate.queryForObject(SELECT_INVOICE_ITEM_SQL, this::mapRowToInvoiceItem, invoiceItemId);
-        }catch(EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
@@ -89,7 +88,7 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
                 invoiceItem.getUnitRate(),
                 invoiceItem.getDiscount(),
                 invoiceItem.getInvoiceItemId()
-                );
+        );
     }
 
     @Override
@@ -107,7 +106,7 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
         jdbcTemplate.update(DELETE_INVOICE_ITEMS_BY_ITEM_SQL, itemId);
     }
 
-    private InvoiceItem mapRowToInvoiceItem(ResultSet rs, int rowNum) throws SQLException{
+    private InvoiceItem mapRowToInvoiceItem(ResultSet rs, int rowNum) throws SQLException {
 
         InvoiceItem invoiceItem = new InvoiceItem();
 
