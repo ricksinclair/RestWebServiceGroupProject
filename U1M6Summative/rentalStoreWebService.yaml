@@ -1,0 +1,408 @@
+openapi: 3.0.0
+info:
+  title: Movie Rental REST Web Service
+  description: Web service for a rental store, with database persistance.
+  version: 0.0.1
+servers: 
+  - url: 'htpp://localhost:8080'
+    description: Local dec server
+    
+paths:
+  /customer/{customerId}:
+    get:
+      description: Return the Customer object of the specified id from the database
+      parameters: 
+        - name: customerId
+          in: path
+          required: true
+          description: The id of the Customer object to be returned
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieve of the specified Customer object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        
+    delete:
+      description: Delete the Customer object linked to the specified id from the database
+      parameters: 
+        - name: customerId
+          in: path
+          required: true
+          description: The id of the Customer object to be deleted
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Successful delete of the specified Customer object
+    
+  /customer:
+    get:
+      description: Get all the Customer objects from the database
+      responses:
+        '200':
+          description: Successful retrieve of all the Customer objects in the database
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+              
+    post:
+      description: Create a new Customer object in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Successful add of the Customer object to the database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        
+    put:
+      description: Update an existing Customer object in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 
+                '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Successful update of the specified Customer object in the request body
+          
+  /item{itemId}:
+    get:
+      description: Return the Item object of the specified id from the database
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: The id of the Item object to be returned
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieve of the specified Item object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        
+    delete:
+      description: Delete the Item object of the specified id from the database
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: The id of the Item object to be deleted
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Successful delete of the specified Item object
+
+  /item:
+    get:
+      description: Get all the Item objects from the database
+      responses:
+        '200':
+          description: Successful retrieve of all the Item objects in the database
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        
+    post:
+      description: Create a new Item object in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Successful add of the Item object to the database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        
+    put:
+      description: Update an existing Item object in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Successful update of the specified Item object in the request body
+        
+  /invoice/{invoiceId}:
+    get:
+      description: Return the Invoice object of the specified id from the database
+      parameters:
+        - name: invoiceId
+          in: path
+          required: true
+          description: The id of the Invoice object to be returned
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieve of the specified Invoice object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+    delete:
+      description: Delete the Invoice object of the specified id from the database
+      parameters:
+        - name: invoiceId
+          in: path
+          required: true
+          description: The id of the Invoice object to be deleted
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Successful delete of the specified Invoice object
+  
+  /invoice/byCustomer/{customerId}:
+    get:
+      description: Return a list of Invoice objects associated to the specified customer id from the database
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          description: The id of the Customer object related to the Invoices objects to be returned
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieve of the list with the Invoice objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+  
+  /invoice:
+    get:
+      description: Return a list with all the Invoice objects from the database
+      responses:
+        '200':
+          description: Successful retrieve of all the Invoice objects in the database
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+                  
+    post:
+      description: Create a new Invoice object in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invoice'
+      responses:
+        '200':
+          description: Successful add of the Invoice object to the database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+                
+    put:
+      description: Update an existing Invoice object in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invoice'
+      responses:
+        '200':
+          description: Successful update of the specified Invoice object in the request body
+  
+  /invoiceItem/{invoiceItemId}:
+    get:
+      description: Return the invoiceItem object of the specified id from the database
+      parameters:
+        - name: invoiceItemId
+          in: path
+          required: true
+          description: The id of the invoiceItem object to be returned
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieve of the specified invoiceItem object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceItem'
+    delete:
+      description: Delete the invoiceItem object of the specified id from the database
+      parameters:
+        - name: invoiceItemId
+          in: path
+          required: true
+          description: The id of the invoiceItem object to be deleted
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Successful delete of the specified invoiceItem object
+          
+  /invoiceItem:
+    get:
+      description: Return a list with all the InvoiceItem objects from the database
+      responses:
+        '200':
+          description: Successful retrieve of all the invoice objects in the database
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceItem'
+    post:
+      description: Create a new InvoiceItem object in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceItem'
+      responses:
+        '200':
+          description: Successful add of the InvoiceIte object to the database
+          
+    put:
+      description: Update an existing InvoiceItem object in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceItem'
+      responses:
+        '200':
+          description: Successful update of the specified InvoiceItem object in the request body
+  
+components:
+  schemas:
+    
+    Customer:
+      type: object
+      properties:
+        customerId:
+          type: number
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        company:
+          type: string
+        phone:
+          type: string
+      required: 
+        - firstName
+        - lastName
+        - email
+        - company
+        - phone
+        
+    Item:
+      type: object
+      properties:
+        itemId:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        dailyRate:
+          type: string
+      required: 
+        - name
+        - description
+        - dailyRate
+        
+    Invoice:
+      type: object
+      properties:
+        invoiceId:
+          type: number
+        customerId:
+          type: number
+        orderDate:
+          type: string
+        pickupDate:
+          type: string
+        returnDate:
+          type: string
+        lateFee:
+          type: number
+      required: 
+        - customerId
+        - orderDate
+        - pickupDate
+        - returnDate
+        - lateFee
+        
+    InvoiceItem:
+      type: object
+      properties:
+        invoiceItemId:
+          type: number
+        invoiceId:
+          type: number
+        itemId:
+          type: number
+        quantity:
+          type: number
+        unitRate:
+          type: number
+        discount:
+          type: number
+      required:
+        - invoiceId
+        - itemId
+        - quantity
+        - unitRate
+        - discount
+        
+        
+    
