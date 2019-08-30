@@ -1,4 +1,5 @@
 package com.company.U1M6Summative.service;
+
 import com.company.U1M6Summative.dao.CustomerDao;
 import com.company.U1M6Summative.dao.InvoiceDao;
 import com.company.U1M6Summative.dao.InvoiceItemDao;
@@ -10,8 +11,10 @@ import com.company.U1M6Summative.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class InvoiceServiceLayer {
     private InvoiceDao invoiceDao;
@@ -48,10 +51,12 @@ public class InvoiceServiceLayer {
         viewModel.setInvoiceItems(invoiceItems);
         return viewModel;
     }
+
     public InvoiceViewModel findInvoice(int id) {
         Invoice invoice = invoiceDao.getInvoice(id);
         return buildInvoiceViewModel(invoice);
     }
+
     public List<InvoiceViewModel> findAllInvoices() {
         List<Invoice> invoiceList = invoiceDao.getAllInvoices();
         List<InvoiceViewModel> ivmList = new ArrayList<>();
@@ -61,6 +66,7 @@ public class InvoiceServiceLayer {
         }
         return ivmList;
     }
+
     @Transactional
     public void updateInvoice(InvoiceViewModel viewModel) {
         Invoice i = new Invoice();
@@ -74,6 +80,7 @@ public class InvoiceServiceLayer {
         List<InvoiceItem> invoiceItemList = invoiceItemDao.getAllInvoiceItemsByInvoiceId(i.getInvoiceId());
 
     }
+
     @Transactional
     public void removeInvoice(int invoiceId) {
         List<InvoiceItem> invoiceItemList = invoiceItemDao.getAllInvoiceItemsByInvoiceId(invoiceId);
@@ -81,21 +88,29 @@ public class InvoiceServiceLayer {
                 .forEach(invoiceItem -> invoiceItemDao.deleteInvoiceItem(invoiceItem.getInvoiceItemId()));
         invoiceDao.deleteInvoice(invoiceId);
     }
+
     public Customer saveCustomer(Customer customer) {
         return customerDao.addCustomer(customer);
     }
+
     public Customer findCustomer(int id) {
+
         return customerDao.getCustomer(id);
     }
+
     public List<Customer> findAllCustomers() {
+
         return customerDao.getAllCustomers();
     }
+
     public void updateCustomer(Customer customer) {
         customerDao.updateCustomer(customer);
     }
+
     public void removeCustomer(int id) {
         customerDao.deleteCustomer(id);
     }
+
     // Helper Methods
     private InvoiceViewModel buildInvoiceViewModel(Invoice invoice) {
         Customer customer = customerDao.getCustomer(invoice.getCustomerId());

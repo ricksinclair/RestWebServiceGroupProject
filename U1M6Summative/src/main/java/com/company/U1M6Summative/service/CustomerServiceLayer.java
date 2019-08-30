@@ -3,7 +3,6 @@ package com.company.U1M6Summative.service;
 import com.company.U1M6Summative.dao.CustomerDao;
 import com.company.U1M6Summative.dao.InvoiceDao;
 import com.company.U1M6Summative.dao.InvoiceItemDao;
-import com.company.U1M6Summative.dao.ItemDao;
 import com.company.U1M6Summative.model.Customer;
 import com.company.U1M6Summative.model.Invoice;;
 import com.company.U1M6Summative.viewmodel.CustomerViewModel;
@@ -20,14 +19,12 @@ public class CustomerServiceLayer {
     private CustomerDao customerDao;
     private InvoiceDao invoiceDao;
     private InvoiceItemDao invoiceItemDao;
-    private ItemDao itemDao;
 
-    public CustomerServiceLayer(CustomerDao customerDao, InvoiceDao invoiceDao, InvoiceItemDao invoiceItemDao, ItemDao itemDao){
+    public CustomerServiceLayer(CustomerDao customerDao, InvoiceDao invoiceDao, InvoiceItemDao invoiceItemDao){
 
         this.customerDao = customerDao;
         this.invoiceDao = invoiceDao;
         this.invoiceItemDao = invoiceItemDao;
-        this.itemDao = itemDao;
     }
 
     public CustomerViewModel findCustomer(int id) {
@@ -53,9 +50,11 @@ public class CustomerServiceLayer {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Building the CustomerViewModel
+        CustomerViewModel cvm = new CustomerViewModel();
+
         Customer customer = customerDao.getCustomer(id);
 
-        CustomerViewModel cvm = new CustomerViewModel();
+
 
         cvm.setId(customer.getCustomerId());
         cvm.setFirstName(customer.getFirstName());
